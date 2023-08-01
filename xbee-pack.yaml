@@ -115,7 +115,7 @@ description: |
     yes: Repeatedly outputs “y” or a given string until killed
     libstdbuf: Library used by stdbuf
 
-in:
+var:
   version: "8.32"
 
 dependencies:
@@ -126,16 +126,16 @@ dependencies:
 
 provision:
   - url:
-      from: https://ftp.gnu.org/gnu/coreutils/coreutils-{% version %}.tar.xz
-      todir: "{% xbeeSrc %}"
+      from: https://ftp.gnu.org/gnu/coreutils/coreutils-{{ .version }}.tar.xz
+      todir: "{{ .xbee.src }}"
   - url:
       from: https://www.linuxfromscratch.org/patches/lfs/11.0/coreutils-8.32-i18n-1.patch
-      todir: "{% xbeeSrc %}"
+      todir: "{{ .xbee.src }}"
       unpack: false
   - folder:
       paths:
-        - "{% xbeeOut %}/usr/sbin"
-        - "{% xbeeOut %}/usr/share/man/man8"
+        - "{{ .xbee.out }}/usr/sbin"
+        - "{{ .xbee.out }}/usr/share/man/man8"
 
 build:
   - shell:
@@ -144,10 +144,10 @@ build:
         - autoreconf -fiv
         - FORCE_UNSAFE_CONFIGURE=1 ./configure --prefix=/usr --enable-no-install-program=kill,uptime
         - make
-        - make install DESTDIR={% xbeeOut %}
-        - mv -v {% xbeeOut %}/usr/bin/chroot {% xbeeOut %}/usr/sbin
-        - mv -v {% xbeeOut %}/usr/share/man/man1/chroot.1 {% xbeeOut %}/usr/share/man/man8/chroot.8
-        - sed -i 's/"1"/"8"/' {% xbeeOut %}/usr/share/man/man8/chroot.8
-      directory: "{% xbeeSrc %}/coreutils-{% version %}"
+        - make install DESTDIR={{ .xbee.out }}
+        - mv -v {{ .xbee.out }}/usr/bin/chroot {{ .xbee.out }}/usr/sbin
+        - mv -v {{ .xbee.out }}/usr/share/man/man1/chroot.1 {{ .xbee.out }}/usr/share/man/man8/chroot.8
+        - sed -i 's/"1"/"8"/' {{ .xbee.out }}/usr/share/man/man8/chroot.8
+      directory: "{{ .xbee.src }}/coreutils-{{ .version }}"
 
 
