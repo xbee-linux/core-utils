@@ -118,7 +118,7 @@ description: |
 var:
   version: "8.32"
 
-dependencies:
+builders:
   - autoconf
   - gettext
   - automake
