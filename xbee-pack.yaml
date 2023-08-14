@@ -125,12 +125,9 @@ builders:
   - m4
 
 provision:
-  - url:
-      from: https://ftp.gnu.org/gnu/coreutils/coreutils-{{ .version }}.tar.xz
-      todir: "{{ .xbee.src }}"
+  - url: https://ftp.gnu.org/gnu/coreutils/coreutils-{{ .version }}.tar.xz
   - url:
       from: https://www.linuxfromscratch.org/patches/lfs/11.0/coreutils-8.32-i18n-1.patch
-      todir: "{{ .xbee.src }}"
       unpack: false
   - folder:
       paths:
