@@ -116,7 +116,8 @@ description: |
     libstdbuf: Library used by stdbuf
 
 var:
-  version: "8.32"
+  xbee:
+    version: "8.32"
 
 builders:
   - autoconf
@@ -125,7 +126,7 @@ builders:
   - m4
 
 provision:
-  - url: https://ftp.gnu.org/gnu/coreutils/coreutils-{{ .version }}.tar.xz
+  - url: https://ftp.gnu.org/gnu/coreutils/coreutils-{{ .xbee.version }}.tar.xz
   - url:
       from: https://www.linuxfromscratch.org/patches/lfs/11.0/coreutils-8.32-i18n-1.patch
       unpack: false
@@ -145,6 +146,6 @@ build:
         - mv -v {{ .xbee.out }}/usr/bin/chroot {{ .xbee.out }}/usr/sbin
         - mv -v {{ .xbee.out }}/usr/share/man/man1/chroot.1 {{ .xbee.out }}/usr/share/man/man8/chroot.8
         - sed -i 's/"1"/"8"/' {{ .xbee.out }}/usr/share/man/man8/chroot.8
-      directory: "{{ .xbee.src }}/coreutils-{{ .version }}"
+      directory: "{{ .xbee.src }}/coreutils-{{ .xbee.version }}"
 
 
