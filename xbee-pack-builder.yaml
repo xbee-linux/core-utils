@@ -1,7 +1,5 @@
 schema-version: 1.0
 
-type: builder
-
 description: |
   The Coreutils package contains utilities for showing and setting the basic system characteristics.
 
@@ -119,7 +117,7 @@ var:
   xbee:
     version: "8.32"
 
-builders:
+builder:
   - autoconf
   - gettext
   - automake
